@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/fuck.unity
+    guid: 256da4e4ed98a024fb9254e8c5cc2f42
+  - enabled: 1
+    path: Assets/Scenes/TestSceneSwap1.unity
+    guid: e3206dcd00d83a84fb326f9eae8777af
   m_configObjects: {}
