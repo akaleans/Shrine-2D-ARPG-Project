@@ -250,6 +250,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4201105202521092335, guid: 5f833d2045a0404418c058f7fe7617aa,
         type: 3}
+    - target: {fileID: 2052917481957995161, guid: aa750390f4a9a49409bb46c2da2c7b9a,
+        type: 3}
+      propertyPath: roomTypes.Array.data[4]
+      value: 
+      objectReference: {fileID: 6527036808394228963, guid: 8b478bd7421ef73479e8b99abcf77abf,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa750390f4a9a49409bb46c2da2c7b9a, type: 3}
 --- !u!1001 &1821207121
