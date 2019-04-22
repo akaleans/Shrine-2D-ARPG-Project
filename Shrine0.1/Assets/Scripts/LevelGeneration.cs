@@ -21,13 +21,18 @@ public class LevelGeneration : MonoBehaviour
     public float maxX;
     public float minY;
     private bool stopGeneration;
+    private bool crawled = false;
+    private bool left = false;
+    private bool right = false;
+    private bool bottom = false;
+    private bool top = false;
 
     // Start is called before the first frame update
     void Start()
     {
         for(int i = 0; i < 16; ++i)
         {
-            level[i] = 0;
+            level[i] = -1;
         }
 
         int randStartingPos = Random.Range(0, startingPositions.Length);
@@ -66,7 +71,7 @@ public class LevelGeneration : MonoBehaviour
                 Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
                 transform.position = newPos;
 
-                if (level[position] == 0)
+                if (level[position] == -1)
                 {
                     if (position == 1 || position == 2) //1, 2
                     {
@@ -316,7 +321,7 @@ public class LevelGeneration : MonoBehaviour
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
                 transform.position = newPos;
 
-                if (level[position] == 0)
+                if (level[position] == -1)
                 {
                     if (position == 0) // 0
                     {
@@ -793,6 +798,233 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
+    void Crawler()
+    {
+        position = 0;
+        transform.position = startingPositions[0].position;
+
+        for (int i = 0; i < 16; ++i)
+        {
+            if (level[i] == -1)
+            {
+                if (i == 0)
+                {
+                    //RIGHT ROOM?
+                    if (level[i + 1] == 3 || level[i + 1] == 4 || level[i + 1] == 5 || level[i + 1] == 6 ||
+                        level[i + 1] == 7 || level[i + 1] == 8 || level[i + 1] == 9 || level[i + 1] == 10)
+                        right = true;
+                    //BOTTOM ROOM?
+                    if (level[i + 4] == 6 || level[i + 4] == 8 || level[i + 4] == 9 || level[i + 4] == 10 ||
+                        level[i + 4] == 11 || level[i + 4] == 12 || level[i + 4] == 13 || level[i + 4] == 14)
+                        bottom = true;
+                }
+                else if (i == 1 || i == 2)
+                {
+                    //LEFT ROOM?
+                    if (level[i - 1] == 0 || level[i - 1] == 1 || level[i - 1] == 5 || level[i - 1] == 7 ||
+                        level[i - 1] == 8 || level[i - 1] == 9 || level[i - 1] == 12 || level[i - 1] == 13)
+                        left = true;
+                    //RIGHT ROOM?
+                    if (level[i + 1] == 3 || level[i + 1] == 4 || level[i + 1] == 5 || level[i + 1] == 6 ||
+                        level[i + 1] == 7 || level[i + 1] == 8 || level[i + 1] == 9 || level[i + 1] == 10)
+                        right = true;
+                    //BOTTOM ROOM?
+                    if (level[i + 4] == 6 || level[i + 4] == 8 || level[i + 4] == 9 || level[i + 4] == 10 ||
+                        level[i + 4] == 11 || level[i + 4] == 12 || level[i + 4] == 13 || level[i + 4] == 14)
+                        bottom = true;
+                }
+                else if (i == 3)
+                {
+                    //LEFT ROOM?
+                    if (level[i - 1] == 0 || level[i - 1] == 1 || level[i - 1] == 5 || level[i - 1] == 7 ||
+                        level[i - 1] == 8 || level[i - 1] == 9 || level[i - 1] == 12 || level[i - 1] == 13)
+                        left = true;
+                    //BOTTOM ROOM?
+                    if (level[i + 4] == 6 || level[i + 4] == 8 || level[i + 4] == 9 || level[i + 4] == 10 ||
+                        level[i + 4] == 11 || level[i + 4] == 12 || level[i + 4] == 13 || level[i + 4] == 14)
+                        bottom = true;
+                }
+                else if (i == 4 || i == 8)
+                {
+                    //RIGHT ROOM?
+                    if (level[i + 1] == 3 || level[i + 1] == 4 || level[i + 1] == 5 || level[i + 1] == 6 ||
+                        level[i + 1] == 7 || level[i + 1] == 8 || level[i + 1] == 9 || level[i + 1] == 10)
+                        right = true;
+                    //TOP ROOM?
+                    if (level[i - 4] == 1 || level[i - 4] == 2 || level[i - 4] == 4 || level[i - 4] == 5 ||
+                        level[i - 4] == 6 || level[i - 4] == 9 || level[i - 4] == 11 || level[i - 4] == 13)
+                        top = true;
+                    //BOTTOM ROOM?
+                    if (level[i + 4] == 6 || level[i + 4] == 8 || level[i + 4] == 9 || level[i + 4] == 10 ||
+                        level[i + 4] == 11 || level[i + 4] == 12 || level[i + 4] == 13 || level[i + 4] == 14)
+                        bottom = true;
+                }
+                else if (i == 5 || i == 6 || i == 9 || i == 10)
+                {
+                    //LEFT ROOM?
+                    if (level[i - 1] == 0 || level[i - 1] == 1 || level[i - 1] == 5 || level[i - 1] == 7 ||
+                        level[i - 1] == 8 || level[i - 1] == 9 || level[i - 1] == 12 || level[i - 1] == 13)
+                        left = true;
+                    //RIGHT ROOM?
+                    if (level[i + 1] == 3 || level[i + 1] == 4 || level[i + 1] == 5 || level[i + 1] == 6 ||
+                        level[i + 1] == 7 || level[i + 1] == 8 || level[i + 1] == 9 || level[i + 1] == 10)
+                        right = true;
+                    //TOP ROOM?
+                    if (level[i - 4] == 1 || level[i - 4] == 2 || level[i - 4] == 4 || level[i - 4] == 5 ||
+                        level[i - 4] == 6 || level[i - 4] == 9 || level[i - 4] == 11 || level[i - 4] == 13)
+                        top = true;
+                    //BOTTOM ROOM?
+                    if (level[i + 4] == 6 || level[i + 4] == 8 || level[i + 4] == 9 || level[i + 4] == 10 ||
+                        level[i + 4] == 11 || level[i + 4] == 12 || level[i + 4] == 13 || level[i + 4] == 14)
+                        bottom = true;
+                }
+                else if (i == 7 || i == 11)
+                {
+                    //LEFT ROOM?
+                    if (level[i - 1] == 0 || level[i - 1] == 1 || level[i - 1] == 5 || level[i - 1] == 7 ||
+                        level[i - 1] == 8 || level[i - 1] == 9 || level[i - 1] == 12 || level[i - 1] == 13)
+                        left = true;
+                    //TOP ROOM?
+                    if (level[i - 4] == 1 || level[i - 4] == 2 || level[i - 4] == 4 || level[i - 4] == 5 ||
+                        level[i - 4] == 6 || level[i - 4] == 9 || level[i - 4] == 11 || level[i - 4] == 13)
+                        top = true;
+                    //BOTTOM ROOM?
+                    if (level[i + 4] == 6 || level[i + 4] == 8 || level[i + 4] == 9 || level[i + 4] == 10 ||
+                        level[i + 4] == 11 || level[i + 4] == 12 || level[i + 4] == 13 || level[i + 4] == 14)
+                        bottom = true;
+                }
+                else if (i == 12)
+                {
+                    //RIGHT ROOM?
+                    if (level[i + 1] == 3 || level[i + 1] == 4 || level[i + 1] == 5 || level[i + 1] == 6 ||
+                        level[i + 1] == 7 || level[i + 1] == 8 || level[i + 1] == 9 || level[i + 1] == 10)
+                        right = true;
+                    //TOP ROOM?
+                    if (level[i - 4] == 1 || level[i - 4] == 2 || level[i - 4] == 4 || level[i - 4] == 5 ||
+                        level[i - 4] == 6 || level[i - 4] == 9 || level[i - 4] == 11 || level[i - 4] == 13)
+                        top = true;
+                }
+                else if (i == 13 || i == 14)
+                {
+                    //LEFT ROOM?
+                    if (level[i - 1] == 0 || level[i - 1] == 1 || level[i - 1] == 5 || level[i - 1] == 7 ||
+                        level[i - 1] == 8 || level[i - 1] == 9 || level[i - 1] == 12 || level[i - 1] == 13)
+                        left = true;
+                    //RIGHT ROOM?
+                    if (level[i + 1] == 3 || level[i + 1] == 4 || level[i + 1] == 5 || level[i + 1] == 6 ||
+                        level[i + 1] == 7 || level[i + 1] == 8 || level[i + 1] == 9 || level[i + 1] == 10)
+                        right = true;
+                    //TOP ROOM?
+                    if (level[i - 4] == 1 || level[i - 4] == 2 || level[i - 4] == 4 || level[i - 4] == 5 ||
+                        level[i - 4] == 6 || level[i - 4] == 9 || level[i - 4] == 11 || level[i - 4] == 13)
+                        top = true;
+                }
+                else if (i == 15)
+                {
+                    //LEFT ROOM?
+                    if (level[i - 1] == 0 || level[i - 1] == 1 || level[i - 1] == 5 || level[i - 1] == 7 ||
+                        level[i - 1] == 8 || level[i - 1] == 9 || level[i - 1] == 12 || level[i - 1] == 13)
+                        left = true;
+                    //TOP ROOM?
+                    if (level[i - 4] == 1 || level[i - 4] == 2 || level[i - 4] == 4 || level[i - 4] == 5 ||
+                        level[i - 4] == 6 || level[i - 4] == 9 || level[i - 4] == 11 || level[i - 4] == 13)
+                        top = true;
+                }
+                if (left == true && right != true && top != true && bottom != true) // L
+                {
+                    Instantiate(roomTypes[3], transform.position, Quaternion.identity);
+                    level[i] = 3;
+                }
+                else if (left != true && right == true && top != true && bottom != true) // R
+                {
+                    Instantiate(roomTypes[0], transform.position, Quaternion.identity);
+                    level[i] = 0;
+                }
+                else if (left != true && right != true && top == true && bottom != true) // T
+                {
+                    Instantiate(roomTypes[14], transform.position, Quaternion.identity);
+                    level[i] = 14;
+                }
+                else if (left != true && right != true && top != true && bottom == true) // B
+                {
+                    Instantiate(roomTypes[2], transform.position, Quaternion.identity);
+                    level[i] = 2;
+                }
+                else if (left == true && right == true && top != true && bottom != true) // LR
+                {
+                    Instantiate(roomTypes[7], transform.position, Quaternion.identity);
+                    level[i] = 7;
+                }
+                else if (left == true && right != true && top == true && bottom != true) // LT
+                {
+                    Instantiate(roomTypes[10], transform.position, Quaternion.identity);
+                    level[i] = 10;
+                }
+                else if (left == true && right != true && top != true && bottom == true) // LB
+                {
+                    Instantiate(roomTypes[4], transform.position, Quaternion.identity);
+                    level[i] = 4;
+                }
+                else if (left != true && right == true && top == true && bottom != true) // RT
+                {
+                    Instantiate(roomTypes[12], transform.position, Quaternion.identity);
+                    level[i] = 12;
+                }
+                else if (left != true && right == true && top != true && bottom == true) // RB
+                {
+                    Instantiate(roomTypes[1], transform.position, Quaternion.identity);
+                    level[i] = 1;
+                }
+                else if (left != true && right != true && top == true && bottom == true) // TB
+                {
+                    Instantiate(roomTypes[11], transform.position, Quaternion.identity);
+                    level[i] = 11;
+                }
+                else if (left == true && right == true && top == true && bottom != true) // LRT
+                {
+                    Instantiate(roomTypes[8], transform.position, Quaternion.identity);
+                    level[i] = 3;
+                }
+                else if (left == true && right == true && top != true && bottom == true) // LRB
+                {
+                    Instantiate(roomTypes[5], transform.position, Quaternion.identity);
+                    level[i] = 5;
+                }
+                else if (left == true && right != true && top == true && bottom == true) // LTB
+                {
+                    Instantiate(roomTypes[6], transform.position, Quaternion.identity);
+                    level[i] = 6;
+                }
+                else if (left != true && right == true && top == true && bottom == true) // RTB
+                {
+                    Instantiate(roomTypes[13], transform.position, Quaternion.identity);
+                    level[i] = 13;
+                }
+                else if (left == true && right == true && top == true && bottom == true) // LRTB
+                {
+                    Instantiate(roomTypes[9], transform.position, Quaternion.identity);
+                    level[i] = 9;
+                }
+            }
+            left = false;
+            right = false;
+            top = false;
+            bottom = false;
+
+            if (i != 3 && i != 7 && i != 11 && i != 15)
+            { 
+                Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
+                transform.position = newPos;
+            }
+            else
+            {
+                Vector2 newPos = new Vector2(transform.position.x - (moveAmount * 3), transform.position.y - moveAmount);
+                transform.position = newPos;
+            }
+        }
+        crawled = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -801,9 +1033,13 @@ public class LevelGeneration : MonoBehaviour
             Move();
             timeBtwRoom = startTimeBtwRoom;
         }
-        else
+        else if (stopGeneration == false)
         {
             timeBtwRoom -= Time.deltaTime;
+        }
+        else if (stopGeneration == true && crawled == false)
+        {
+            Crawler();
         }
     }
 }
