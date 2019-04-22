@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
+    private PlayerController player;
+    private CameraController camera;
     public Transform[] startingPositions;
     public GameObject[] roomTypes;
     public int[] level = new int[16];
@@ -26,10 +28,12 @@ public class LevelGeneration : MonoBehaviour
     private bool right = false;
     private bool bottom = false;
     private bool top = false;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        
         for(int i = 0; i < 16; ++i)
         {
             level[i] = -1;
@@ -57,6 +61,12 @@ public class LevelGeneration : MonoBehaviour
             Instantiate(roomTypes[4], transform.position, Quaternion.identity);
             level[position] = 4;
         }
+
+        player = FindObjectOfType<PlayerController>();
+        player.transform.position = transform.position;
+
+        camera = FindObjectOfType<CameraController>();
+        camera.transform.position = new Vector3(transform.position.x, transform.position.y, camera.transform.position.z);
 
         direction = Random.Range(1, 6);
     }
