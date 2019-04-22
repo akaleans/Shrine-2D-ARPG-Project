@@ -120,7 +120,7 @@ public class LevelGeneration : MonoBehaviour
                         level[position] = 4;
                         direction = 5;
                     }
-                    else if (position == 5 && (level[1] == 1 || level[1] == 4 || level[1] == 5 || level[1] == 2)) // 5
+                    else if (position == 5 && (level[1] == 1 || level[1] == 4 || level[1] == 5 || level[1] == 2 || level[1] == 13)) // 5
                     {
                         int[] roomArray = new int[] { 9, 6, 8 };
                         rand = Random.Range(0, 3);
@@ -142,7 +142,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 6) direction = 5;
                         else if (randomRoom == 8) direction = 1;
                     }
-                    else if (position == 5 && (level[1] != 1 && level[1] != 4 && level[1] != 5 && level[1] != 2)) // 5
+                    else if (position == 5 && (level[1] != 1 && level[1] != 4 && level[1] != 5 && level[1] != 2 && level[1] != 13)) // 5
                     {
                         int[] roomArray = new int[] { 7, 4 };
                         rand = Random.Range(0, 2);
@@ -152,7 +152,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 7) direction = 1;
                         else if (randomRoom == 4) direction = 5;
                     }
-                    else if (position == 6 && (level[2] == 1 || level[2] == 4 || level[2] == 5 || level[2] == 2)) // 6
+                    else if (position == 6 && (level[2] == 1 || level[2] == 4 || level[2] == 5 || level[2] == 2 || level[2] == 13)) // 6
                     {
                         int[] roomArray = new int[] { 9, 6, 8 };
                         rand = Random.Range(0, 3);
@@ -174,7 +174,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 6) direction = 5;
                         else if (randomRoom == 8) direction = 1;
                     }
-                    else if (position == 6 && (level[2] != 1 && level[2] != 4 && level[2] != 5 && level[2] != 2)) // 6
+                    else if (position == 6 && (level[2] != 1 && level[2] != 4 && level[2] != 5 && level[2] != 2 && level[2] != 13)) // 6
                     {
                         int[] roomArray = new int[] { 7, 4 };
                         rand = Random.Range(0, 2);
@@ -184,7 +184,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 7) direction = 1;
                         else if (randomRoom == 4) direction = 5;
                     }
-                    else if (position == 9 && (level[5] == 1 || level[5] == 4 || level[5] == 5 || level[5] == 2)) // 9
+                    else if (position == 9 && (level[5] == 1 || level[5] == 4 || level[5] == 5 || level[5] == 2 || level[5] == 6 || level[5] == 9 || level[5] == 11 || level[5] == 13)) // 9
                     {
                         int[] roomArray = new int[] { 9, 6, 8 };
                         rand = Random.Range(0, 3);
@@ -206,7 +206,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 6) direction = 5;
                         else if (randomRoom == 8) direction = 1;
                     }
-                    else if (position == 9 && (level[5] != 1 && level[5] != 4 && level[5] != 5 && level[5] != 2)) // 9
+                    else if (position == 9 && (level[5] != 1 && level[5] != 4 && level[5] != 5 && level[5] != 2 && level[5] != 6 && level[5] != 9 && level[5] != 11 && level[5] != 13)) // 9
                     {
                         int[] roomArray = new int[] { 7, 4 };
                         rand = Random.Range(0, 2);
@@ -216,7 +216,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 7) direction = 1;
                         else if (randomRoom == 4) direction = 5;
                     }
-                    else if (position == 10 && (level[6] == 1 || level[6] == 4 || level[6] == 5 || level[6] == 2)) // 10
+                    else if (position == 10 && (level[6] == 1 || level[6] == 4 || level[6] == 5 || level[6] == 2 || level[6] == 6 || level[6] == 9 || level[6] == 11 || level[6] == 13)) // 10
                     {
                         int[] roomArray = new int[] { 9, 6, 8 };
                         rand = Random.Range(0, 3);
@@ -238,7 +238,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 6) direction = 5;
                         else if (randomRoom == 8) direction = 1;
                     }
-                    else if (position == 10 && (level[6] != 1 && level[6] != 4 && level[6] != 5 && level[6] != 2)) // 10
+                    else if (position == 10 && (level[6] != 1 && level[6] != 4 && level[6] != 5 && level[6] != 2 && level[6] != 6 && level[6] != 9 && level[6] != 11 && level[6] != 13)) // 10
                     {
                         int[] roomArray = new int[] { 7, 4 };
                         rand = Random.Range(0, 2);
@@ -248,7 +248,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 7) direction = 1;
                         else if (randomRoom == 4) direction = 5;
                     }
-                    else if (position == 13 && (level[9] == 1 || level[9] == 4 || level[9] == 5 || level[9] == 2)) // 13
+                    else if (position == 13 && (level[9] == 1 || level[9] == 4 || level[9] == 5 || level[9] == 2 || level[9] == 6 || level[9] == 9 || level[9] == 11 || level[9] == 13)) // 13
                     {
                         int[] roomArray = new int[] { 10, 8 };
                         rand = Random.Range(0, 2);
@@ -258,7 +258,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 10) stopGeneration = true;
                         else if (randomRoom == 8) direction = 1;
                     }
-                    else if (position == 13 && (level[9] != 1 && level[9] != 4 && level[9] != 5 && level[9] != 2)) // 13
+                    else if (position == 13 && (level[9] != 1 && level[9] != 4 && level[9] != 5 && level[9] != 2 && level[9] != 6 && level[9] != 9 && level[9] != 11 && level[9] != 13)) // 13
                     {
                         int[] roomArray = new int[] { 3, 7 };
                         rand = Random.Range(0, 2);
@@ -268,7 +268,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 3) stopGeneration = true;
                         else if (randomRoom == 7) direction = 1;
                     }
-                    else if (position == 14 && (level[10] == 1 || level[10] == 4 || level[10] == 5 || level[10] == 2)) // 14
+                    else if (position == 14 && (level[10] == 1 || level[10] == 4 || level[10] == 5 || level[10] == 2 || level[10] == 6 || level[10] == 9 || level[10] == 11 || level[10] == 13)) // 14
                     {
                         int[] roomArray = new int[] { 10, 8 };
                         rand = Random.Range(0, 2);
@@ -278,7 +278,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 10) stopGeneration = true;
                         else if (randomRoom == 8) direction = 1;
                     }
-                    else if (position == 14 && (level[10] != 1 && level[10] != 4 && level[10] != 5 && level[10] != 2)) // 14
+                    else if (position == 14 && (level[10] != 1 && level[10] != 4 && level[10] != 5 && level[10] != 2 && level[10] != 6 && level[10] != 9 && level[10] != 11 && level[10] != 13)) // 14
                     {
                         int[] roomArray = new int[] { 3, 7 };
                         rand = Random.Range(0, 2);
@@ -359,7 +359,7 @@ public class LevelGeneration : MonoBehaviour
                         level[position] = 1;
                         direction = 5;
                     }
-                    else if (position == 5 && (level[1] == 1 || level[1] == 4 || level[1] == 5 || level[1] == 2)) // 5
+                    else if (position == 5 && (level[1] == 1 || level[1] == 4 || level[1] == 5 || level[1] == 2 || level[1] == 13)) // 5
                     {
                         int[] roomArray = new int[] { 13, 9, 8 };
                         rand = Random.Range(0, 3);
@@ -370,7 +370,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 9) direction = Random.Range(3, 6);
                         else if (randomRoom == 8) direction = 3;
                     }
-                    else if (position == 5 && (level[1] != 1 && level[1] != 4 && level[1] != 5 && level[1] != 2)) // 5
+                    else if (position == 5 && (level[1] != 1 && level[1] != 4 && level[1] != 5 && level[1] != 2 && level[1] != 13)) // 5
                     {
                         int[] roomArray = new int[] { 5, 1 };
                         rand = Random.Range(0, 2);
@@ -380,7 +380,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 5) direction = Random.Range(3, 6);
                         else if (randomRoom == 1) direction = 5;
                     }
-                    else if (position == 6 && (level[2] == 1 || level[2] == 4 || level[2] == 5 || level[2] == 2)) // 6
+                    else if (position == 6 && (level[2] == 1 || level[2] == 4 || level[2] == 5 || level[2] == 2 || level[2] == 13)) // 6
                     {
                         int[] roomArray = new int[] { 13, 9, 8 };
                         rand = Random.Range(0, 3);
@@ -391,7 +391,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 9) direction = Random.Range(3, 6);
                         else if (randomRoom == 8) direction = 3;
                     }
-                    else if (position == 6 && (level[2] != 1 && level[2] != 4 && level[2] != 5 && level[2] != 2)) // 6
+                    else if (position == 6 && (level[2] != 1 && level[2] != 4 && level[2] != 5 && level[2] != 2 && level[2] != 13)) // 6
                     {
                         int[] roomArray = new int[] { 5, 1 };
                         rand = Random.Range(0, 2);
@@ -401,7 +401,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 5) direction = Random.Range(3, 6);
                         else if (randomRoom == 1) direction = 5;
                     }
-                    else if (position == 9 && (level[5] == 1 || level[5] == 4 || level[5] == 5 || level[5] == 2)) // 9
+                    else if (position == 9 && (level[5] == 1 || level[5] == 4 || level[5] == 5 || level[5] == 2 || level[5] == 6 || level[5] == 9 || level[5] == 11 || level[5] == 13)) // 9
                     {
                         int[] roomArray = new int[] { 13, 9, 8 };
                         rand = Random.Range(0, 3);
@@ -412,7 +412,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 9) direction = Random.Range(3, 6);
                         else if (randomRoom == 8) direction = 3;
                     }
-                    else if (position == 9 && (level[5] != 1 && level[5] != 4 && level[5] != 5 && level[5] != 2)) // 9
+                    else if (position == 9 && (level[5] != 1 && level[5] != 4 && level[5] != 5 && level[5] != 2 && level[5] != 6 && level[5] != 9 && level[5] != 11 && level[5] != 13)) // 9
                     {
                         int[] roomArray = new int[] { 5, 1 };
                         rand = Random.Range(0, 2);
@@ -422,7 +422,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 5) direction = Random.Range(3, 6);
                         else if (randomRoom == 1) direction = 5;
                     }
-                    else if (position == 10 && (level[6] == 1 || level[6] == 4 || level[6] == 5 || level[6] == 2)) // 10
+                    else if (position == 10 && (level[6] == 1 || level[6] == 4 || level[6] == 5 || level[6] == 2 || level[6] == 6 || level[6] == 9 || level[6] == 11 || level[6] == 13)) // 10
                     {
                         int[] roomArray = new int[] { 13, 9, 8 };
                         rand = Random.Range(0, 3);
@@ -433,7 +433,7 @@ public class LevelGeneration : MonoBehaviour
                         else if (randomRoom == 9) direction = Random.Range(3, 6);
                         else if (randomRoom == 8) direction = 3;
                     }
-                    else if (position == 10 && (level[6] != 1 && level[6] != 4 && level[6] != 5 && level[6] != 2)) // 10
+                    else if (position == 10 && (level[6] != 1 && level[6] != 4 && level[6] != 5 && level[6] != 2 && level[6] != 6 && level[6] != 9 && level[6] != 11 && level[6] != 13)) // 10
                     {
                         int[] roomArray = new int[] { 5, 1 };
                         rand = Random.Range(0, 2);
@@ -443,7 +443,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 5) direction = Random.Range(3, 6);
                         else if (randomRoom == 1) direction = 5;
                     }
-                    else if (position == 13 && (level[9] == 1 || level[9] == 4 || level[9] == 5 || level[9] == 2)) // 13
+                    else if (position == 13 && (level[9] == 1 || level[9] == 4 || level[9] == 5 || level[9] == 2 || level[9] == 6 || level[9] == 9 || level[9] == 11 || level[9] == 13)) // 13
                     {
                         int[] roomArray = new int[] { 8, 12 };
                         rand = Random.Range(0, 2);
@@ -453,7 +453,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 12) stopGeneration = true;
                         else if (randomRoom == 8) direction = 3;
                     }
-                    else if (position == 13 && (level[9] != 1 && level[9] != 4 && level[9] != 5 && level[9] != 2)) // 13
+                    else if (position == 13 && (level[9] != 1 && level[9] != 4 && level[9] != 5 && level[9] != 2 && level[9] != 6 && level[9] != 9 && level[9] != 11 && level[9] != 13)) // 13
                     {
                         int[] roomArray = new int[] { 7, 0 };
                         rand = Random.Range(0, 2);
@@ -463,7 +463,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 0) stopGeneration = true;
                         else if (randomRoom == 7) direction = 3;
                     }
-                    else if (position == 14 && (level[10] == 1 || level[10] == 4 || level[10] == 5 || level[10] == 2)) // 14
+                    else if (position == 14 && (level[10] == 1 || level[10] == 4 || level[10] == 5 || level[10] == 2 || level[10] == 6 || level[10] == 9 || level[10] == 11 || level[10] == 13)) // 14
                     {
                         int[] roomArray = new int[] { 8, 12 };
                         rand = Random.Range(0, 2);
@@ -473,7 +473,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randomRoom == 12) stopGeneration = true;
                         else if (randomRoom == 8) direction = 3;
                     }
-                    else if (position == 14 && (level[10] != 1 && level[10] != 4 && level[10] != 5 && level[10] != 2)) // 14
+                    else if (position == 14 && (level[10] != 1 && level[10] != 4 && level[10] != 5 && level[10] != 2 && level[10] != 6 && level[10] != 9 && level[10] != 11 && level[10] != 13)) // 14
                     {
                         int[] roomArray = new int[] { 7, 0 };
                         rand = Random.Range(0, 2);
