@@ -8,7 +8,11 @@ public class LevelGeneration : MonoBehaviour
     private CameraController camera;
     public Transform[] startingPositions;
     public GameObject[] roomTypes;
-    public int[] level = new int[16];
+    public GameObject[] shrineSystem;
+    private int[] level = new int[16];
+    private int[] roomOrder = new int[16];
+    private int roomCount;
+    private int shrineCount;
     
     private int rand;
     private int randomRoom;
@@ -33,15 +37,19 @@ public class LevelGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        roomCount = -1;
+
         for(int i = 0; i < 16; ++i)
         {
             level[i] = -1;
+            roomOrder[i] = -1;
         }
 
         int randStartingPos = Random.Range(0, startingPositions.Length);
         if (randStartingPos == 0)
         {
+            roomCount++;
+            roomOrder[roomCount] = position;
             position = randStartingPos;
             transform.position = startingPositions[randStartingPos].position;
             Instantiate(roomTypes[1], transform.position, Quaternion.identity);
@@ -49,6 +57,8 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (randStartingPos == 1 || randStartingPos == 2)
         {
+            roomCount++;
+            roomOrder[roomCount] = position;
             position = randStartingPos;
             transform.position = startingPositions[randStartingPos].position;
             Instantiate(roomTypes[5], transform.position, Quaternion.identity);
@@ -56,6 +66,8 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (randStartingPos == 3)
         {
+            roomCount++;
+            roomOrder[roomCount] = position;
             position = randStartingPos;
             transform.position = startingPositions[randStartingPos].position;
             Instantiate(roomTypes[4], transform.position, Quaternion.identity);
@@ -78,6 +90,8 @@ public class LevelGeneration : MonoBehaviour
             if(transform.position.x < maxX)
             {
                 position += 1;
+                roomCount++;
+                roomOrder[roomCount] = position;
                 Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
                 transform.position = newPos;
 
@@ -328,6 +342,8 @@ public class LevelGeneration : MonoBehaviour
             if(transform.position.x > minX)
             {
                 position -= 1;
+                roomCount++;
+                roomOrder[roomCount] = position;
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
                 transform.position = newPos;
 
@@ -522,6 +538,8 @@ public class LevelGeneration : MonoBehaviour
             if(transform.position.y > minY)
             {
                 position += 4;
+                roomCount++;
+                roomOrder[roomCount] = position;
                 Vector2 newPos = new Vector2(transform.position.x, transform.position.y - moveAmount);
                 transform.position = newPos;
 
@@ -817,6 +835,8 @@ public class LevelGeneration : MonoBehaviour
         {
             if (level[i] == -1)
             {
+                roomCount++;
+                roomOrder[roomCount] = i;
                 if (i == 0)
                 {
                     //RIGHT ROOM?
@@ -1033,6 +1053,12 @@ public class LevelGeneration : MonoBehaviour
             }
         }
         crawled = true;
+        ShrineSeeder();
+    }
+
+    void ShrineSeeder()
+    {
+
     }
 
     // Update is called once per frame
