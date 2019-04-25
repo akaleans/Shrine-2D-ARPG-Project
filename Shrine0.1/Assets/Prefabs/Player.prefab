@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1315789283771484006}
   - component: {fileID: 1315789283771484007}
-  - component: {fileID: 1315789283771484009}
+  - component: {fileID: 8680542275396327353}
   - component: {fileID: 1315789283771484008}
   - component: {fileID: 1315789283771484011}
   - component: {fileID: 1315789283771484010}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -424869935
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayer: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300044, guid: a20fc5886f7fe424c920958b9eb36acc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1315789283771484009
+--- !u!114 &8680542275396327353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d360b55fef3254aa66ab9fea9305d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 0
 --- !u!95 &1315789283771484008
 Animator:
   serializedVersion: 3

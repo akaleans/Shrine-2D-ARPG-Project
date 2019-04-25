@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerStartPoint : MonoBehaviour
 {
-    public PlayerController player;
+    public Player player;
     public CameraController camera;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<Player>();
         player.transform.position = transform.position;
 
         camera = FindObjectOfType<CameraController>();

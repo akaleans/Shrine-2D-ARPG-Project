@@ -2,20 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Player : Character
 {
-    public float moveSpeed;
-    private Animator anim;
-    private Rigidbody2D myRigidBody;
+    [SerializeField]
+    private Status health;
 
-    private bool isMoving;
-    private Vector2 lastMove;
+    [SerializeField]
+    private Status mana;
+
+    [SerializeField]
+    private float maxHealth;
+
+    [SerializeField]
+    private float maxMana;
 
     private static bool playerExists;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        health.Initialize(maxHealth, maxHealth);
+        mana.Initialize(maxMana, maxMana);
+
         anim = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
 
@@ -30,15 +38,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void GetInput()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            health.MyCurrentValue -= 10;
+            mana.MyCurrentValue -= 10;
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            health.MyCurrentValue += 10;
+            mana.MyCurrentValue += 10;
+        }
+    }
+
     // Update is called once per frame
-    void Update()
+    protected override void Update()
+    {
+        GetInput();
+        base.Update();
+    }
+
+    protected override void Move()
     {
         isMoving = false;
 
         float moveHorizontal = Input.GetAxisRaw("Horizontal") * moveSpeed;
         float moveVertical = Input.GetAxisRaw("Vertical") * moveSpeed;
 
-        if(moveVertical != 0f && moveHorizontal != 0f)
+        if (moveVertical != 0f && moveHorizontal != 0f)
         {
             moveHorizontal *= 0.7071f;
             moveVertical *= 0.7071f;
@@ -46,19 +74,19 @@ public class PlayerController : MonoBehaviour
             myRigidBody.velocity = new Vector2(moveHorizontal, moveVertical);
             lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
         }
-        if(moveHorizontal != 0f && moveVertical == 0f)
+        if (moveHorizontal != 0f && moveVertical == 0f)
         {
             isMoving = true;
             myRigidBody.velocity = new Vector2(moveHorizontal, moveVertical);
             lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
         }
-        if(moveVertical != 0f && moveHorizontal == 0f)
+        if (moveVertical != 0f && moveHorizontal == 0f)
         {
             isMoving = true;
             myRigidBody.velocity = new Vector2(moveHorizontal, moveVertical);
             lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
         }
-        if(moveHorizontal == 0 && moveVertical == 0)
+        if (moveHorizontal == 0 && moveVertical == 0)
         {
             myRigidBody.velocity = new Vector2(0f, 0f);
         }

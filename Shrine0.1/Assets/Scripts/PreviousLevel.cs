@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PreviousLevel : MonoBehaviour
 {
-    private PlayerController player;
+    private Player player;
     private CameraController camera;
 
     // Start is called before the first frame update

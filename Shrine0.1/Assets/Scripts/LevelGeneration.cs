@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
-    private PlayerController player;
+    private Player player;
     private CameraController camera;
     public Vector3[] startingPositions;
     public GameObject[] roomTypes;
@@ -90,7 +90,7 @@ public class LevelGeneration : MonoBehaviour
             Instantiate(roomTypes[4], transform.position, Quaternion.identity);
             level[position] = 4;
         }
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<Player>();
         player.transform.position = transform.position;
 
         camera = FindObjectOfType<CameraController>();
