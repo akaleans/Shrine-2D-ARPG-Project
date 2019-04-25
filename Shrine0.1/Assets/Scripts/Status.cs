@@ -8,6 +8,9 @@ public class Status : MonoBehaviour
     private Image content;
 
     [SerializeField]
+    private Text statusValue;
+
+    [SerializeField]
     private float lerpSpeed;
     private float currentFill;
 
@@ -35,6 +38,8 @@ public class Status : MonoBehaviour
             }
 
             currentFill = currentValue / MyMaxValue;
+
+            statusValue.text = currentValue + " / " + MyMaxValue;
         }
     }
     private float currentValue;

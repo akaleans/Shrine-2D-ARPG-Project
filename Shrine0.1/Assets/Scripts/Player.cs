@@ -16,6 +16,9 @@ public class Player : Character
     [SerializeField]
     private float maxMana;
 
+    [SerializeField]
+    private GameObject[] spellPrefabs;
+
     private static bool playerExists;
 
     // Start is called before the first frame update
@@ -24,8 +27,7 @@ public class Player : Character
         health.Initialize(maxHealth, maxHealth);
         mana.Initialize(maxMana, maxMana);
 
-        anim = GetComponent<Animator>();
-        myRigidBody = GetComponent<Rigidbody2D>();
+        base.Start();
 
         if (!playerExists)
         {
@@ -40,15 +42,41 @@ public class Player : Character
 
     private void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        direction = Vector2.zero;
+        if (Input.GetKey(KeyCode.W))
         {
-            health.MyCurrentValue -= 10;
-            mana.MyCurrentValue -= 10;
+            direction += Vector2.up;
         }
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKey(KeyCode.A))
         {
-            health.MyCurrentValue += 10;
-            mana.MyCurrentValue += 10;
+            direction += Vector2.left;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            direction += Vector2.down;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            direction += Vector2.right;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            StartCoroutine(Attack()); // simultaneously
+        }
+    }
+
+    private IEnumerator Attack()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            myAnimator.SetBool("attack", isAttacking);
+
+            yield return new WaitForSeconds(1); // cast time
+
+            CastProjectile();
+
+            StopAttack();
         }
     }
 
@@ -59,41 +87,8 @@ public class Player : Character
         base.Update();
     }
 
-    protected override void Move()
+    public void CastProjectile()
     {
-        isMoving = false;
-
-        float moveHorizontal = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        float moveVertical = Input.GetAxisRaw("Vertical") * moveSpeed;
-
-        if (moveVertical != 0f && moveHorizontal != 0f)
-        {
-            moveHorizontal *= 0.7071f;
-            moveVertical *= 0.7071f;
-            isMoving = true;
-            myRigidBody.velocity = new Vector2(moveHorizontal, moveVertical);
-            lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
-        }
-        if (moveHorizontal != 0f && moveVertical == 0f)
-        {
-            isMoving = true;
-            myRigidBody.velocity = new Vector2(moveHorizontal, moveVertical);
-            lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
-        }
-        if (moveVertical != 0f && moveHorizontal == 0f)
-        {
-            isMoving = true;
-            myRigidBody.velocity = new Vector2(moveHorizontal, moveVertical);
-            lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
-        }
-        if (moveHorizontal == 0 && moveVertical == 0)
-        {
-            myRigidBody.velocity = new Vector2(0f, 0f);
-        }
-        anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
-        anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
-        anim.SetBool("IsMoving", isMoving);
-        anim.SetFloat("LastMoveX", lastMove.x);
-        anim.SetFloat("LastMoveY", lastMove.y);
+        Instantiate(spellPrefabs[0], transform.position, Quaternion.identity);
     }
 }
