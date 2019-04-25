@@ -6,11 +6,11 @@ public class LevelGeneration : MonoBehaviour
 {
     private PlayerController player;
     private CameraController camera;
-    public Transform[] startingPositions;
+    public Vector3[] startingPositions;
     public GameObject[] roomTypes;
-    public GameObject[] shrineSystem;
+    public GameObject[] mapObjects;
     private int[] level = new int[16];
-    private int[] roomOrder = new int[16];
+    private Vector2[] roomTransforms = new Vector2[16];
     private int roomCount;
     private int shrineCount;
     
@@ -23,6 +23,10 @@ public class LevelGeneration : MonoBehaviour
     private float timeBtwRoom;
     public float startTimeBtwRoom = 0.25f;
 
+    public static float newMapVectorX;
+    public static float newMapVectorY;
+    public static float newMapVectorZ;
+
     public float minX;
     public float maxX;
     public float minY;
@@ -32,48 +36,60 @@ public class LevelGeneration : MonoBehaviour
     private bool right = false;
     private bool bottom = false;
     private bool top = false;
-    
 
     // Start is called before the first frame update
     void Start()
     {
+        newMapVectorX = transform.position.x + 60;
+        newMapVectorY = transform.position.y;
+        newMapVectorZ = transform.position.z;
+
+        Instantiate(mapObjects[3], transform.position, Quaternion.identity);
+        startingPositions = new Vector3[4];
+        minX = transform.position.x - 15;
+        maxX = transform.position.x + 15;
+        minY = transform.position.y - 15;
+        startingPositions[0] = new Vector3(transform.position.x - 15, transform.position.y + 15, transform.position.z);
+        startingPositions[1] = new Vector3(transform.position.x - 5, transform.position.y + 15, transform.position.z);
+        startingPositions[2] = new Vector3(transform.position.x + 5, transform.position.y + 15, transform.position.z);
+        startingPositions[3] = new Vector3(transform.position.x + 15, transform.position.y + 15, transform.position.z);
+
         roomCount = -1;
 
         for(int i = 0; i < 16; ++i)
         {
             level[i] = -1;
-            roomOrder[i] = -1;
+            roomTransforms[i] = new Vector2(0f, 0f);
         }
 
         int randStartingPos = Random.Range(0, startingPositions.Length);
         if (randStartingPos == 0)
         {
             roomCount++;
-            roomOrder[roomCount] = position;
             position = randStartingPos;
-            transform.position = startingPositions[randStartingPos].position;
+            transform.position = startingPositions[randStartingPos];
+            roomTransforms[roomCount] = transform.position;
             Instantiate(roomTypes[1], transform.position, Quaternion.identity);
             level[position] = 1;
         }
         else if (randStartingPos == 1 || randStartingPos == 2)
         {
             roomCount++;
-            roomOrder[roomCount] = position;
             position = randStartingPos;
-            transform.position = startingPositions[randStartingPos].position;
+            transform.position = startingPositions[randStartingPos];
+            roomTransforms[roomCount] = transform.position;
             Instantiate(roomTypes[5], transform.position, Quaternion.identity);
             level[position] = 5;
         }
         else if (randStartingPos == 3)
         {
             roomCount++;
-            roomOrder[roomCount] = position;
             position = randStartingPos;
-            transform.position = startingPositions[randStartingPos].position;
+            transform.position = startingPositions[randStartingPos];
+            roomTransforms[roomCount] = transform.position;
             Instantiate(roomTypes[4], transform.position, Quaternion.identity);
             level[position] = 4;
         }
-
         player = FindObjectOfType<PlayerController>();
         player.transform.position = transform.position;
 
@@ -91,9 +107,9 @@ public class LevelGeneration : MonoBehaviour
             {
                 position += 1;
                 roomCount++;
-                roomOrder[roomCount] = position;
                 Vector2 newPos = new Vector2(transform.position.x + moveAmount, transform.position.y);
                 transform.position = newPos;
+                roomTransforms[roomCount] = transform.position;
 
                 if (level[position] == -1)
                 {
@@ -343,9 +359,9 @@ public class LevelGeneration : MonoBehaviour
             {
                 position -= 1;
                 roomCount++;
-                roomOrder[roomCount] = position;
                 Vector2 newPos = new Vector2(transform.position.x - moveAmount, transform.position.y);
                 transform.position = newPos;
+                roomTransforms[roomCount] = transform.position;
 
                 if (level[position] == -1)
                 {
@@ -539,9 +555,9 @@ public class LevelGeneration : MonoBehaviour
             {
                 position += 4;
                 roomCount++;
-                roomOrder[roomCount] = position;
                 Vector2 newPos = new Vector2(transform.position.x, transform.position.y - moveAmount);
                 transform.position = newPos;
+                roomTransforms[roomCount] = transform.position;
 
                 if (position == 4) // 4
                 {
@@ -829,14 +845,12 @@ public class LevelGeneration : MonoBehaviour
     void Crawler()
     {
         position = 0;
-        transform.position = startingPositions[0].position;
+        transform.position = startingPositions[0];
 
         for (int i = 0; i < 16; ++i)
         {
             if (level[i] == -1)
             {
-                roomCount++;
-                roomOrder[roomCount] = i;
                 if (i == 0)
                 {
                     //RIGHT ROOM?
@@ -964,76 +978,106 @@ public class LevelGeneration : MonoBehaviour
                 {
                     Instantiate(roomTypes[3], transform.position, Quaternion.identity);
                     level[i] = 3;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left != true && right == true && top != true && bottom != true) // R
                 {
                     Instantiate(roomTypes[0], transform.position, Quaternion.identity);
                     level[i] = 0;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left != true && right != true && top == true && bottom != true) // T
                 {
                     Instantiate(roomTypes[14], transform.position, Quaternion.identity);
                     level[i] = 14;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left != true && right != true && top != true && bottom == true) // B
                 {
                     Instantiate(roomTypes[2], transform.position, Quaternion.identity);
                     level[i] = 2;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left == true && right == true && top != true && bottom != true) // LR
                 {
                     Instantiate(roomTypes[7], transform.position, Quaternion.identity);
                     level[i] = 7;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left == true && right != true && top == true && bottom != true) // LT
                 {
                     Instantiate(roomTypes[10], transform.position, Quaternion.identity);
                     level[i] = 10;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left == true && right != true && top != true && bottom == true) // LB
                 {
                     Instantiate(roomTypes[4], transform.position, Quaternion.identity);
                     level[i] = 4;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left != true && right == true && top == true && bottom != true) // RT
                 {
                     Instantiate(roomTypes[12], transform.position, Quaternion.identity);
                     level[i] = 12;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left != true && right == true && top != true && bottom == true) // RB
                 {
                     Instantiate(roomTypes[1], transform.position, Quaternion.identity);
                     level[i] = 1;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left != true && right != true && top == true && bottom == true) // TB
                 {
                     Instantiate(roomTypes[11], transform.position, Quaternion.identity);
                     level[i] = 11;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left == true && right == true && top == true && bottom != true) // LRT
                 {
                     Instantiate(roomTypes[8], transform.position, Quaternion.identity);
                     level[i] = 3;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left == true && right == true && top != true && bottom == true) // LRB
                 {
                     Instantiate(roomTypes[5], transform.position, Quaternion.identity);
                     level[i] = 5;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left == true && right != true && top == true && bottom == true) // LTB
                 {
                     Instantiate(roomTypes[6], transform.position, Quaternion.identity);
                     level[i] = 6;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left != true && right == true && top == true && bottom == true) // RTB
                 {
                     Instantiate(roomTypes[13], transform.position, Quaternion.identity);
                     level[i] = 13;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
                 else if (left == true && right == true && top == true && bottom == true) // LRTB
                 {
                     Instantiate(roomTypes[9], transform.position, Quaternion.identity);
                     level[i] = 9;
+                    roomCount++;
+                    roomTransforms[roomCount] = transform.position;
                 }
             }
             left = false;
@@ -1053,11 +1097,65 @@ public class LevelGeneration : MonoBehaviour
             }
         }
         crawled = true;
-        ShrineSeeder();
     }
 
     void ShrineSeeder()
     {
+        if(roomCount == 3)
+        {
+            Instantiate(mapObjects[1], roomTransforms[1], Quaternion.identity); // shrine
+            Instantiate(mapObjects[1], roomTransforms[2], Quaternion.identity); // shrine
+        }
+        if(roomCount >= 4 && roomCount < 6){
+            //Instantiate(mapObjects[0], roomTransforms[1], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[1], Quaternion.identity); // shrine
+            Instantiate(mapObjects[1], roomTransforms[2], Quaternion.identity); // shrine
+            Instantiate(mapObjects[1], roomTransforms[3], Quaternion.identity); // shrine
+        }
+        else if(roomCount >= 6 && roomCount < 8)
+        {
+            //Instantiate(mapObjects[0], roomTransforms[1], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[1], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[3], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[3], Quaternion.identity); // shrine
+            Instantiate(mapObjects[1], roomTransforms[5], Quaternion.identity); // shrine
+        }
+        else if (roomCount >= 8 && roomCount < 10)
+        {
+            //Instantiate(mapObjects[0], roomTransforms[1], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[1], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[3], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[3], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[5], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[5], Quaternion.identity); // shrine
+            Instantiate(mapObjects[1], roomTransforms[7], Quaternion.identity); // shrine
+        }
+        else if (roomCount >= 10 && roomCount < 12)
+        {
+            //Instantiate(mapObjects[0], roomTransforms[1], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[1], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[3], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[3], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[5], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[5], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[7], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[7], Quaternion.identity); // shrine
+            Instantiate(mapObjects[1], roomTransforms[9], Quaternion.identity); // shrine
+        }
+        else if (roomCount >= 12)
+        {
+            //Instantiate(mapObjects[0], roomTransforms[1], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[1], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[3], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[3], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[5], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[5], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[7], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[7], Quaternion.identity); // shrine
+            //Instantiate(mapObjects[0], roomTransforms[9], Quaternion.identity); // lever
+            Instantiate(mapObjects[1], roomTransforms[9], Quaternion.identity); // shrine
+            Instantiate(mapObjects[1], roomTransforms[11], Quaternion.identity); // shrine
+        }
 
     }
 
@@ -1075,6 +1173,9 @@ public class LevelGeneration : MonoBehaviour
         }
         else if (stopGeneration == true && crawled == false)
         {
+            Instantiate(mapObjects[2], roomTransforms[roomCount], Quaternion.identity); // red portal
+            Instantiate(mapObjects[4], roomTransforms[0], Quaternion.identity); // blue portal
+            ShrineSeeder();
             Crawler();
         }
     }
