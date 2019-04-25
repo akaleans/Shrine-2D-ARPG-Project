@@ -18,6 +18,11 @@ public class Player : Character
 
     [SerializeField]
     private GameObject[] spellPrefabs;
+    
+    private GameObject projectile;
+
+    private Vector3 mousePos;
+    private Vector2 spellDirection;
 
     private static bool playerExists;
 
@@ -61,20 +66,24 @@ public class Player : Character
         }
         if (Input.GetMouseButton(0))
         {
-            StartCoroutine(Attack()); // simultaneously
+            StartCoroutine(LeftMouseAttack()); // simultaneously
         }
     }
 
-    private IEnumerator Attack()
+    private IEnumerator LeftMouseAttack()
     {
         if (!isAttacking)
         {
             isAttacking = true;
             myAnimator.SetBool("attack", isAttacking);
 
+            Ray spellDirection = Camera.main.ScreenPointToRay(Input.mousePosition);
+            spellDirection.direction = new Vector3(spellDirection.direction.x, spellDirection.direction.y, 0f);
+
             yield return new WaitForSeconds(1); // cast time
 
-            CastProjectile();
+            projectile = Instantiate(spellPrefabs[0], transform.position, Quaternion.identity);
+            projectile.GetComponent<Spell>().SpellDirection(spellDirection.direction);
 
             StopAttack();
         }
@@ -85,10 +94,5 @@ public class Player : Character
     {
         GetInput();
         base.Update();
-    }
-
-    public void CastProjectile()
-    {
-        Instantiate(spellPrefabs[0], transform.position, Quaternion.identity);
     }
 }
