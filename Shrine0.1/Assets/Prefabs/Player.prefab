@@ -96,6 +96,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+  health: {fileID: 0}
+  mana: {fileID: 0}
+  maxHealth: 0
+  maxMana: 0
+  spellPrefabs: []
 --- !u!95 &1315789283771484008
 Animator:
   serializedVersion: 3
@@ -150,5 +155,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.7, y: 1}
+  m_Size: {x: 0.4, y: 1}
   m_Direction: 0

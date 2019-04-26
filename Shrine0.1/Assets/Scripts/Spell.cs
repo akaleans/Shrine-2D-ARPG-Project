@@ -5,13 +5,11 @@ using UnityEngine;
 public class Spell : MonoBehaviour
 {
     private Rigidbody2D myRigidBody;
-    private Player myPlayer;
 
     [SerializeField]
     private float spellSpeed;
 
     private Vector2 direction;
-    private Vector3 worldMousePos;
 
     public void SpellDirection(Vector2 spellDirection)
     {

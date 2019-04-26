@@ -82,4 +82,14 @@ public abstract class Character : MonoBehaviour
         isAttacking = false;
         myAnimator.SetBool("attack", isAttacking);
     }
+
+    //for enemy for later
+    private bool InLineOfSight()
+    {
+        Vector3 targetDirection = (targetDirection.transform.position - transform.position);
+
+        Debug.DrawRay(transform.position, targetDirection, Color.red);
+
+        return false;
+    }
 }
