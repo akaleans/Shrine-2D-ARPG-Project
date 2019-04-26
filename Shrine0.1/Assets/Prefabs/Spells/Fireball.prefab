@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 516488586784933312}
   - component: {fileID: 129095115241887016}
   m_Layer: 0
-  m_Name: ArcaneBlast
+  m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -424869935
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: -642242059803743227, guid: 138d0fac96c30a040a6c399c1cc2f4eb,
+  m_Sprite: {fileID: 6926522332454594311, guid: a3b7d7aaab2dafa45853fdd1ca10b0b0,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 785107535755957340}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c8f9d1021d96e5645995e8a273958cb1, type: 2}
+  m_Controller: {fileID: 9100000, guid: f35cb55b7183e7244be746d0cb84c1df, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

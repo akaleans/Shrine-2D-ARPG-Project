@@ -84,12 +84,18 @@ public abstract class Character : MonoBehaviour
     }
 
     //for enemy for later
-    private bool InLineOfSight()
-    {
-        Vector3 targetDirection = (targetDirection.transform.position - transform.position);
+    //private bool InLineOfSight()
+    //{
+    //    Vector3 targetDirection = (targetDirection.transform.position - transform.position);
 
-        Debug.DrawRay(transform.position, targetDirection, Color.red);
+    //    RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection,
+    //                                        Vector2.Distance(transform.position, target.transform.position));
 
-        return false;
-    }
+    //    if (hit.collider == null)
+    //    {
+    //        return true;
+    //    }
+
+    //    return false;
+    //}
 }

@@ -18,6 +18,7 @@ public class Player : Character
 
     [SerializeField]
     private GameObject[] spellPrefabs;
+    private int spellIndex;
 
     [SerializeField]
     private Transform[] exitPoints;
@@ -25,6 +26,7 @@ public class Player : Character
     
     private GameObject projectile;
 
+    private Vector3 mousePos;
     private Ray spellDirection;
 
     private static bool playerExists;
@@ -34,6 +36,8 @@ public class Player : Character
     {
         health.Initialize(maxHealth, maxHealth);
         mana.Initialize(maxMana, maxMana);
+
+        spellIndex = 0;
 
         base.Start();
 
@@ -71,6 +75,14 @@ public class Player : Character
         {
             StartCoroutine(LeftMouseAttack()); // simultaneously
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            spellIndex = 2; //fireball NEED TO CHANGE CHECK ELEMENTS
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            spellIndex = 3; //firewall NEED TO CHANGE CHECK ELEMENTS
+        }
     }
 
     private IEnumerator LeftMouseAttack()
@@ -82,10 +94,14 @@ public class Player : Character
 
             //get direction for spell to travel
             spellDirection = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.Log(spellDirection);
             spellDirection.direction = new Vector3(spellDirection.direction.x, spellDirection.direction.y, 0f);
 
-            //set direction for sprites
+            //get location for atlocationspell
+            mousePos = Input.mousePosition;
+            mousePos.z = 15;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            //set direction for animator
             myAnimator.SetFloat("x", spellDirection.direction.x);
             myAnimator.SetFloat("y", spellDirection.direction.y);
 
@@ -94,8 +110,16 @@ public class Player : Character
 
             yield return new WaitForSeconds(1); // cast time
 
-            projectile = Instantiate(spellPrefabs[0], exitPoints[exitIndex].position, Quaternion.identity);
-            projectile.GetComponent<Spell>().SpellDirection(spellDirection.direction);
+            if(spellIndex == 0 || spellIndex == 2)
+            {
+                projectile = Instantiate(spellPrefabs[spellIndex], exitPoints[exitIndex].position, Quaternion.identity);
+                projectile.GetComponent<ProjectileSpell>().SpellDirection(spellDirection.direction); //MUST CHECK SPELL TYPE
+            }
+            else if(spellIndex == 3)
+            {
+                projectile = Instantiate(spellPrefabs[spellIndex], mousePos, Quaternion.identity);
+                projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction); //MUST CHECK SPELL TYPE
+            }
 
             StopAttack();
         }

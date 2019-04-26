@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4549737842828364922}
   - component: {fileID: 5625990454909366532}
   - component: {fileID: 516488586784933312}
-  - component: {fileID: 129095115241887016}
+  - component: {fileID: 2138562215658796336}
   m_Layer: 0
-  m_Name: ArcaneBlast
+  m_Name: Firewall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -424869935
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: -642242059803743227, guid: 138d0fac96c30a040a6c399c1cc2f4eb,
+  m_Sprite: {fileID: 6095407958410632455, guid: 91529d1fda160744690ff490fff02456,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 785107535755957340}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c8f9d1021d96e5645995e8a273958cb1, type: 2}
+  m_Controller: {fileID: 9100000, guid: fcb68579bfb55424197a40434777453f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &129095115241887016
+--- !u!114 &2138562215658796336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 785107535755957340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3614392084fce84ca0fcc598d3a511b, type: 3}
+  m_Script: {fileID: 11500000, guid: f20a2658a3b47af4ba7ef3d638763f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellSpeed: 5
+  spellDuration: 5
