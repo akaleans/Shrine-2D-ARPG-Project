@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5625990454909366532}
   - component: {fileID: 516488586784933312}
   - component: {fileID: 129095115241887016}
+  - component: {fileID: -8714239587753503224}
   m_Layer: 0
   m_Name: ArcaneBlast
   m_TagString: Untagged
@@ -93,7 +94,7 @@ Animator:
   m_GameObject: {fileID: 785107535755957340}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c8f9d1021d96e5645995e8a273958cb1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 78a4df014d8884a4fbd19b2e6ecdbffd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -136,3 +137,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellSpeed: 5
+--- !u!70 &-8714239587753503224
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785107535755957340}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.6, y: 0.6}
+  m_Direction: 0

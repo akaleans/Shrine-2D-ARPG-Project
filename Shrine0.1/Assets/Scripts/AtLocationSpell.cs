@@ -11,6 +11,8 @@ public class AtLocationSpell : MonoBehaviour
     [SerializeField]
     private float spellDuration;
 
+    private bool alive = true;
+
     public void SpellDirection(Vector2 spellDirection)
     {
         direction = spellDirection;
@@ -24,11 +26,12 @@ public class AtLocationSpell : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        myRigidBody.velocity = direction.normalized * 0.01f;
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (alive)
+        {
+            myRigidBody.velocity = direction.normalized * 0.01f;
+        }
     }
 
 }

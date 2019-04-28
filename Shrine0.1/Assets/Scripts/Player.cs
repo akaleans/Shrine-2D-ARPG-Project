@@ -85,6 +85,22 @@ public class Player : Character
         }
     }
 
+    private void GetDirections()
+    {
+        //get direction for spell to travel
+        spellDirection = Camera.main.ScreenPointToRay(Input.mousePosition);
+        spellDirection.direction = new Vector3(spellDirection.direction.x, spellDirection.direction.y, 0f);
+
+        //get location for atlocationspell
+        mousePos = Input.mousePosition;
+        mousePos.z = 15;
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        //set direction for animator
+        myAnimator.SetFloat("x", spellDirection.direction.x);
+        myAnimator.SetFloat("y", spellDirection.direction.y);
+    }
+
     private IEnumerator LeftMouseAttack()
     {
         if (!isAttacking)
@@ -92,18 +108,8 @@ public class Player : Character
             isAttacking = true;
             myAnimator.SetBool("attack", isAttacking);
 
-            //get direction for spell to travel
-            spellDirection = Camera.main.ScreenPointToRay(Input.mousePosition);
-            spellDirection.direction = new Vector3(spellDirection.direction.x, spellDirection.direction.y, 0f);
-
-            //get location for atlocationspell
-            mousePos = Input.mousePosition;
-            mousePos.z = 15;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            //set direction for animator
-            myAnimator.SetFloat("x", spellDirection.direction.x);
-            myAnimator.SetFloat("y", spellDirection.direction.y);
+            //get spell direction and location
+            GetDirections();
 
             //get exitpoint
             GetExitPoint(spellDirection);
@@ -126,33 +132,25 @@ public class Player : Character
         }
         else if (spellIndex == 3) //firewall
         {
+            yield return new WaitForSeconds(0f);
             projectile = Instantiate(spellPrefabs[spellIndex], mousePos, Quaternion.identity);
             projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction); 
-            Debug.Log("Mouse " + mousePos);
-            Debug.Log("Direc " + spellDirection);
 
             yield return new WaitForSeconds(0.2f);
-            //+1
-            Debug.Log(("x " + spellDirection.direction.y) + mousePos.x);
-            Debug.Log(("y " + spellDirection.direction.x) + mousePos.y);
             projectile = Instantiate(spellPrefabs[spellIndex], new Vector3((spellDirection.direction.y) + mousePos.x,
                                                                            (-spellDirection.direction.x) + mousePos.y,
                                                                             mousePos.z), Quaternion.identity);
             projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction);
-            //-1
             projectile = Instantiate(spellPrefabs[spellIndex], new Vector3((-spellDirection.direction.y) + mousePos.x,
                                                                            (spellDirection.direction.x) + mousePos.y,
                                                                             mousePos.z), Quaternion.identity);
             projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction);
+
             yield return new WaitForSeconds(0.2f);
-            //+2
-            Debug.Log(("x " + spellDirection.direction.y) + mousePos.x);
-            Debug.Log(("y " + spellDirection.direction.x) + mousePos.y);
             projectile = Instantiate(spellPrefabs[spellIndex], new Vector3((spellDirection.direction.y * 2) + mousePos.x,
                                                                            (-spellDirection.direction.x * 2) + mousePos.y,
                                                                             mousePos.z), Quaternion.identity);
             projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction);
-            //-2
             projectile = Instantiate(spellPrefabs[spellIndex], new Vector3((-spellDirection.direction.y * 2) + mousePos.x,
                                                                            (spellDirection.direction.x * 2) + mousePos.y,
                                                                             mousePos.z), Quaternion.identity);
