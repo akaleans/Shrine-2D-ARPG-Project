@@ -14,7 +14,7 @@ public class EnemyAggroRange : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            parent.Target = collision.transform;
+            //parent.Target = collision.transform;
         }
     }
 }

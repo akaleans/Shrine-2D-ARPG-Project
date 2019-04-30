@@ -9,6 +9,9 @@ public abstract class Character : MonoBehaviour
     protected Animator myAnimator;
     private Rigidbody2D myRigidBody;
 
+    [SerializeField]
+    protected Transform hitBox;
+
     protected Vector2 direction;
     protected bool isAttacking = false;
 
