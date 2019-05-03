@@ -25,9 +25,9 @@ class AttackState : IEnemyState
             parent.MyCooldown = 0;
             parent.StartCoroutine(Attack());
         }
-        if(parent.Target != null)
+        if(parent.MyTarget != null)
         {
-            float distance = Vector2.Distance(parent.Target.position, parent.transform.position);
+            float distance = Vector2.Distance(parent.MyTarget.position, parent.transform.position);
             if(distance >= (parent.MyAttackRange + extraRange) && !parent.IsAttacking)
             {
                 parent.ChangeState(new FollowState());

@@ -9,7 +9,7 @@ public abstract class Character : MonoBehaviour
 
     public Animator MyAnimator { get; set; }
 
-    private Rigidbody2D myRigidBody;
+    protected Rigidbody2D myRigidBody;
 
     [SerializeField]
     protected Status health;
@@ -19,6 +19,10 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField]
     protected Transform hitBox;
+
+    private Transform target;
+
+    public Transform MyTarget { get => target; set => target = value; }
 
     private Vector2 direction;
     public bool IsAttacking { get; set; }
@@ -112,7 +116,7 @@ public abstract class Character : MonoBehaviour
         MyAnimator.SetBool("attack", IsAttacking);
     }
 
-    public virtual void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage, Transform source)
     {
         health.MyCurrentValue -= damage;
 

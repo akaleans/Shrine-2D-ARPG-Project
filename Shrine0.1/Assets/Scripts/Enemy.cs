@@ -15,14 +15,20 @@ public class Enemy : NPC
     private float myCooldown;
     [SerializeField]
     private float myAttackSpeed;
+    [SerializeField]
+    private float initAggroRange;
 
     public float MyAttackRange { get => myAttackRange; set => myAttackRange = value; }
     public float MyCooldown { get => myCooldown; set => myCooldown = value; }
     public float MyAttackSpeed { get => myAttackSpeed; set => myAttackSpeed = value; }
-
-    private Transform target;
-
-    public Transform Target { get => target; set => target = value; }
+    public float MyAggroRange { get; set; }
+    public bool InRange
+    {
+        get
+        {
+            return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange;
+        }
+    }
 
     protected override void Update()
     {
@@ -39,6 +45,7 @@ public class Enemy : NPC
 
     protected void Awake()
     {
+        MyAggroRange = initAggroRange;
         ChangeState(new IdleState());
     }
 
@@ -50,5 +57,29 @@ public class Enemy : NPC
         }
         currentState = newState;
         currentState.Enter(this);
+    }
+
+    public override void TakeDamage(float damage, Transform source)
+    {
+        SetTarget(source);
+
+        base.TakeDamage(damage, source);
+    }
+
+    public void SetTarget(Transform target)
+    {
+        if(MyTarget == null)
+        {
+            float distance = Vector2.Distance(transform.position, target.position);
+            MyAggroRange = initAggroRange;
+            MyAggroRange += distance;
+            MyTarget = target;
+        }
+    }
+
+    public void Reset()
+    {
+        MyTarget = null;
+        MyAggroRange = initAggroRange;
     }
 }

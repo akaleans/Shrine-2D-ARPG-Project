@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Shrine
   layers:
   - Default
   - TransparentFX
@@ -53,4 +54,7 @@ TagManager:
     locked: 0
   - name: Front
     uniqueID: 1161588735
+    locked: 0
+  - name: UI
+    uniqueID: 1800667233
     locked: 0

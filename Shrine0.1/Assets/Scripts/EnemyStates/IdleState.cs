@@ -8,6 +8,8 @@ class IdleState : IEnemyState
     public void Enter(Enemy parent)
     {
         this.parent = parent;
+        this.parent.MyTarget = null;
+        this.parent.Reset();
     }
 
     public void Exit()
@@ -18,7 +20,7 @@ class IdleState : IEnemyState
     public void Update()
     {
         //change into follow state if the player is within aggro range
-        if (parent.Target != null)
+        if (parent.MyTarget != null)
         {
             parent.ChangeState(new FollowState());
         }

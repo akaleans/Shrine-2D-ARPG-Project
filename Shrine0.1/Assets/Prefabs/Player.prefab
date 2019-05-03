@@ -1,5 +1,62 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2587097742659096975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1942499663308800297}
+  - component: {fileID: 913122446567484590}
+  m_Layer: 0
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1942499663308800297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2587097742659096975}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3325567566306545530}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &913122446567484590
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2587097742659096975}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.8}
+  m_EdgeRadius: 0
 --- !u!1 &3325567565489514989
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +215,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3325567565762329624}
+  - {fileID: 1942499663308800297}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -223,14 +281,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   health: {fileID: 0}
-  mana: {fileID: 0}
   maxHealth: 100
+  hitBox: {fileID: 1942499663308800297}
+  mana: {fileID: 0}
   maxMana: 100
+  attackSpeed: 0
   spellPrefabs:
   - {fileID: 785107535755957340, guid: 71dbd1f133c0e974ea09b9058d8b4d78, type: 3}
   - {fileID: 785107535755957340, guid: 71dbd1f133c0e974ea09b9058d8b4d78, type: 3}
   - {fileID: 785107535755957340, guid: 0d4dcc833c7c078409abde32c322efe7, type: 3}
   - {fileID: 785107535755957340, guid: 8ee74ba69c052d4449ae2a443e0c4c03, type: 3}
+  - {fileID: 785107535755957340, guid: e5d6e76feca728b43bb463e82822a6c5, type: 3}
   exitPoints:
   - {fileID: 3325567565489514988}
   - {fileID: 3325567566299887821}
@@ -248,6 +309,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b2df1b8a255174a99f12434eaa8da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spells:
+  - name: Arcane Blast
+    damage: 5
+    icon: {fileID: -642242059803743227, guid: 138d0fac96c30a040a6c399c1cc2f4eb, type: 3}
+    speed: 5
+    spellPrefab: {fileID: 785107535755957340, guid: 71dbd1f133c0e974ea09b9058d8b4d78,
+      type: 3}
+  - name: Arcane Blast
+    damage: 5
+    icon: {fileID: -642242059803743227, guid: 138d0fac96c30a040a6c399c1cc2f4eb, type: 3}
+    speed: 5
+    spellPrefab: {fileID: 785107535755957340, guid: 71dbd1f133c0e974ea09b9058d8b4d78,
+      type: 3}
+  - name: Fireball
+    damage: 10
+    icon: {fileID: 6926522332454594311, guid: a3b7d7aaab2dafa45853fdd1ca10b0b0, type: 3}
+    speed: 5
+    spellPrefab: {fileID: 785107535755957340, guid: 0d4dcc833c7c078409abde32c322efe7,
+      type: 3}
+  - name: Firewall
+    damage: 5
+    icon: {fileID: 6529048583750062132, guid: 91529d1fda160744690ff490fff02456, type: 3}
+    speed: 0
+    spellPrefab: {fileID: 785107535755957340, guid: 8ee74ba69c052d4449ae2a443e0c4c03,
+      type: 3}
+  - name: Twister
+    damage: 5
+    icon: {fileID: 7926588371139825405, guid: b8e391e7e26bf3b46b05d371d86be75a, type: 3}
+    speed: 1
+    spellPrefab: {fileID: 785107535755957340, guid: e5d6e76feca728b43bb463e82822a6c5,
+      type: 3}
 --- !u!95 &3325567566306545524
 Animator:
   serializedVersion: 3

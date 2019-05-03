@@ -16,8 +16,11 @@ public class AtLocationSpell : MonoBehaviour
 
     private bool alive = true;
 
-    public void Initialize(Vector2 spellDirection, float damage)
+    private Transform source;
+
+    public void Initialize(Vector2 spellDirection, float damage, Transform source)
     {
+        this.source = source;
         direction = spellDirection;
         spellDamage = damage;
     }
@@ -29,20 +32,12 @@ public class AtLocationSpell : MonoBehaviour
         Destroy(gameObject, spellDuration);
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        if (alive)
-        {
-            myRigidBody.velocity = direction.normalized * 0f;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
         {
-            collision.GetComponentInParent<Enemy>().TakeDamage(spellDamage);
+            Character c = collision.GetComponentInParent<Enemy>();
+            c.TakeDamage(spellDamage, source);
             GetComponent<Animator>().SetTrigger("hit");
         }
     }
