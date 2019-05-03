@@ -9,13 +9,17 @@ public class ProjectileSpell : MonoBehaviour
     [SerializeField]
     private float spellSpeed;
 
+    [SerializeField]
+    private float spellDamage;
+
     private Vector2 direction;
 
     private bool alive = true;
 
-    public void SpellDirection(Vector2 spellDirection)
+    public void Initialize(Vector2 spellDirection, float damage)
     {
         direction = spellDirection;
+        spellDamage = damage;
     }
 
     // Start is called before the first frame update
@@ -39,6 +43,7 @@ public class ProjectileSpell : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
+            collision.GetComponentInParent<Enemy>().TakeDamage(spellDamage);
             GetComponent<Animator>().SetTrigger("hit");
             spellSpeed = 0.5f;
         }

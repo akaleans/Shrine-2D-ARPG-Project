@@ -11,11 +11,15 @@ public class AtLocationSpell : MonoBehaviour
     [SerializeField]
     private float spellDuration;
 
+    [SerializeField]
+    private float spellDamage;
+
     private bool alive = true;
 
-    public void SpellDirection(Vector2 spellDirection)
+    public void Initialize(Vector2 spellDirection, float damage)
     {
         direction = spellDirection;
+        spellDamage = damage;
     }
 
     // Start is called before the first frame update
@@ -30,8 +34,16 @@ public class AtLocationSpell : MonoBehaviour
     {
         if (alive)
         {
-            myRigidBody.velocity = direction.normalized * 0.01f;
+            myRigidBody.velocity = direction.normalized * 0f;
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            collision.GetComponentInParent<Enemy>().TakeDamage(spellDamage);
+            GetComponent<Animator>().SetTrigger("hit");
+        }
+    }
 }

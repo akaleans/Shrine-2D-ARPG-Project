@@ -5,13 +5,7 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField]
-    private Status health;
-
-    [SerializeField]
     private Status mana;
-
-    [SerializeField]
-    private float maxHealth;
 
     [SerializeField]
     private float maxMana;
@@ -38,7 +32,6 @@ public class Player : Character
     // Start is called before the first frame update
     protected override void Start()
     {
-        health.Initialize(maxHealth, maxHealth);
         mana.Initialize(maxMana, maxMana);
 
         spellBook = GetComponent<SpellBook>();
@@ -59,22 +52,22 @@ public class Player : Character
 
     private void GetInput()
     {
-        direction = Vector2.zero;
+        Direction = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
         {
-            direction += Vector2.up;
+            Direction += Vector2.up;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            direction += Vector2.left;
+            Direction += Vector2.left;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            direction += Vector2.down;
+            Direction += Vector2.down;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            direction += Vector2.right;
+            Direction += Vector2.right;
         }
         if (Input.GetMouseButton(0))
         {
@@ -102,16 +95,16 @@ public class Player : Character
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
         //set direction for animator
-        myAnimator.SetFloat("x", spellDirection.direction.x);
-        myAnimator.SetFloat("y", spellDirection.direction.y);
+        MyAnimator.SetFloat("x", spellDirection.direction.x);
+        MyAnimator.SetFloat("y", spellDirection.direction.y);
     }
 
     private IEnumerator LeftMouseAttack()
     {
-        if (!isAttacking)
+        if (!IsAttacking)
         {
-            isAttacking = true;
-            myAnimator.SetBool("attack", isAttacking);
+            IsAttacking = true;
+            MyAnimator.SetBool("attack", IsAttacking);
 
             //get spell direction and location
             GetDirections();
@@ -134,34 +127,35 @@ public class Player : Character
         if (spellIndex == 0 || spellIndex == 2) //projectile
         {
             yield return new WaitForSeconds(0f);
-            projectile = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity);
-            projectile.GetComponent<ProjectileSpell>().SpellDirection(spellDirection.direction);
+            ProjectileSpell s = Instantiate(newSpell.MySpellPrefab, exitPoints[exitIndex].position, Quaternion.identity).GetComponent<ProjectileSpell>();
+            s.Initialize(spellDirection.direction, newSpell.MyDamage);
+           
         }
         else if (spellIndex == 3) //firewall
         {
             yield return new WaitForSeconds(0f);
-            projectile = Instantiate(newSpell.MySpellPrefab, mousePos, Quaternion.identity);
-            projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction); 
+            AtLocationSpell s = Instantiate(newSpell.MySpellPrefab, mousePos, Quaternion.identity).GetComponent<AtLocationSpell>();
+            s.Initialize(spellDirection.direction, newSpell.MyDamage); 
 
             yield return new WaitForSeconds(0.2f);
-            projectile = Instantiate(newSpell.MySpellPrefab, new Vector3((spellDirection.direction.y) + mousePos.x,
+            s = Instantiate(newSpell.MySpellPrefab, new Vector3((spellDirection.direction.y) + mousePos.x,
                                                                            (-spellDirection.direction.x) + mousePos.y,
-                                                                            mousePos.z), Quaternion.identity);
-            projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction);
-            projectile = Instantiate(newSpell.MySpellPrefab, new Vector3((-spellDirection.direction.y) + mousePos.x,
+                                                                            mousePos.z), Quaternion.identity).GetComponent<AtLocationSpell>();
+            s.Initialize(spellDirection.direction, newSpell.MyDamage);
+            s = Instantiate(newSpell.MySpellPrefab, new Vector3((-spellDirection.direction.y) + mousePos.x,
                                                                            (spellDirection.direction.x) + mousePos.y,
-                                                                            mousePos.z), Quaternion.identity);
-            projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction);
+                                                                            mousePos.z), Quaternion.identity).GetComponent<AtLocationSpell>();
+            s.Initialize(spellDirection.direction, newSpell.MyDamage);
 
             yield return new WaitForSeconds(0.2f);
-            projectile = Instantiate(newSpell.MySpellPrefab, new Vector3((spellDirection.direction.y * 2) + mousePos.x,
+            s = Instantiate(newSpell.MySpellPrefab, new Vector3((spellDirection.direction.y * 2) + mousePos.x,
                                                                            (-spellDirection.direction.x * 2) + mousePos.y,
-                                                                            mousePos.z), Quaternion.identity);
-            projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction);
-            projectile = Instantiate(newSpell.MySpellPrefab, new Vector3((-spellDirection.direction.y * 2) + mousePos.x,
+                                                                            mousePos.z), Quaternion.identity).GetComponent<AtLocationSpell>();
+            s.Initialize(spellDirection.direction, newSpell.MyDamage);
+            s = Instantiate(newSpell.MySpellPrefab, new Vector3((-spellDirection.direction.y * 2) + mousePos.x,
                                                                            (spellDirection.direction.x * 2) + mousePos.y,
-                                                                            mousePos.z), Quaternion.identity);
-            projectile.GetComponent<AtLocationSpell>().SpellDirection(spellDirection.direction);
+                                                                            mousePos.z), Quaternion.identity).GetComponent<AtLocationSpell>();
+            s.Initialize(spellDirection.direction, newSpell.MyDamage);
 
         }
     }

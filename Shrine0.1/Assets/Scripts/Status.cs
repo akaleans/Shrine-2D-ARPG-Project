@@ -39,7 +39,10 @@ public class Status : MonoBehaviour
 
             currentFill = currentValue / MyMaxValue;
 
-            statusValue.text = currentValue + " / " + MyMaxValue;
+            if(statusValue != null)
+            {
+                statusValue.text = currentValue + " / " + MyMaxValue;
+            }
         }
     }
     private float currentValue;

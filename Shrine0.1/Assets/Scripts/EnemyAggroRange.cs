@@ -10,11 +10,20 @@ public class EnemyAggroRange : MonoBehaviour
     {
         parent = GetComponentInParent<Enemy>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            //parent.Target = collision.transform;
+            parent.Target = collision.transform;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            parent.Target = null;
         }
     }
 }

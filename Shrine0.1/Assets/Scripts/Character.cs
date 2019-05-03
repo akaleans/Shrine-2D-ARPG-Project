@@ -5,28 +5,47 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour
 {
     [SerializeField]
-    protected float moveSpeed;
-    protected Animator myAnimator;
+    private float moveSpeed;
+
+    public Animator MyAnimator { get; set; }
+
     private Rigidbody2D myRigidBody;
+
+    [SerializeField]
+    protected Status health;
+
+    [SerializeField]
+    private float maxHealth;
 
     [SerializeField]
     protected Transform hitBox;
 
-    protected Vector2 direction;
-    protected bool isAttacking = false;
+    private Vector2 direction;
+    public bool IsAttacking { get; set; }
+    public bool IsAlive
+    {
+        get
+        {
+            return health.MyCurrentValue > 0;
+        }
+    }
 
     public bool IsMoving
     {
         get
         {
-            return direction.x != 0 || direction.y != 0;
+            return Direction.x != 0 || Direction.y != 0;
         }
     }
+
+    public Vector2 Direction { get => direction; set => direction = value; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        myAnimator = GetComponent<Animator>();
+        health.Initialize(maxHealth, maxHealth);
+        MyAnimator = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -43,47 +62,66 @@ public abstract class Character : MonoBehaviour
 
     public void Move()
     {
-        if (!isAttacking)
+        if (IsAlive)
         {
-            myRigidBody.velocity = direction.normalized * moveSpeed;
-        }
-        else if (isAttacking)
-        {
-            myRigidBody.velocity = direction.normalized * 0f;
+            if (!IsAttacking)
+            {
+                myRigidBody.velocity = Direction.normalized * MoveSpeed;
+            }
+            else if (IsAttacking)
+            {
+                myRigidBody.velocity = Direction.normalized * 0f;
+            }
         }
     }
 
     public void HandleLayers()
     {
-        if (IsMoving && !isAttacking)
+        if (IsAlive)
         {
-            ActivateLayer("WalkLayer");
+            if (IsMoving && !IsAttacking)
+            {
+                ActivateLayer("WalkLayer");
 
-            myAnimator.SetFloat("x", direction.x);
-            myAnimator.SetFloat("y", direction.y);
+                MyAnimator.SetFloat("x", Direction.x);
+                MyAnimator.SetFloat("y", Direction.y);
+            }
+            else if (IsAttacking)
+            {
+                ActivateLayer("AttackLayer");
+            }
+            else
+                ActivateLayer("IdleLayer");
         }
-        else if (isAttacking)
-        {
-            ActivateLayer("AttackLayer");
-        }
-        else
-            ActivateLayer("IdleLayer");
+        else ActivateLayer("DeathLayer");
     }
 
 
     public void ActivateLayer(string layerName)
     {
-        for(int i = 0; i < myAnimator.layerCount; ++i)
+        for(int i = 0; i < MyAnimator.layerCount; ++i)
         {
-            myAnimator.SetLayerWeight(i, 0);
+            MyAnimator.SetLayerWeight(i, 0);
         }
-        myAnimator.SetLayerWeight(myAnimator.GetLayerIndex(layerName), 1);
+        MyAnimator.SetLayerWeight(MyAnimator.GetLayerIndex(layerName), 1);
     }
 
     public void StopAttack()
     {
-        isAttacking = false;
-        myAnimator.SetBool("attack", isAttacking);
+        IsAttacking = false;
+        MyAnimator.SetBool("attack", IsAttacking);
+    }
+
+    public virtual void TakeDamage(float damage)
+    {
+        health.MyCurrentValue -= damage;
+
+        if(health.MyCurrentValue <= 0)
+        {
+            direction = Vector2.zero;
+            myRigidBody.velocity = direction;
+            MyAnimator.SetTrigger("die");
+        }
     }
 
     //for enemy for later
