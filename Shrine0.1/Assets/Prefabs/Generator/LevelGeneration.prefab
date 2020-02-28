@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2052917481957995142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052917481957995160}
+  - component: {fileID: 2052917481957995161}
+  m_Layer: 0
+  m_Name: LevelGeneration
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2052917481957995160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052917481957995142}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20, y: 20, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2052917481957995161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052917481957995142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387230bfd62e22f45bea46893e08268e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  roomTypes:
+  - {fileID: 8625371410156714942, guid: d5d675c93dd473540b95eec8e733ee05, type: 3}
+  - {fileID: 3267441550611791131, guid: 4d03a96fe7d90fe4fa0033323e0270b3, type: 3}
+  - {fileID: 8008690563165946875, guid: 507730b89974f6248b09cc1e4442b702, type: 3}
+  - {fileID: 3542623180566331157, guid: a3d24dd09297d4641a07848502e39a60, type: 3}
+  - {fileID: 673700363326303725, guid: 47c9e30b69154ea48bff1822f982a21e, type: 3}
+  - {fileID: 5608915164227187467, guid: 2b15d7487e9d7f04f9736b5760b68c60, type: 3}
+  - {fileID: 6912844405507076599, guid: 3c914ad1cbb7f4b478b4b07dd4b1befe, type: 3}
+  - {fileID: 5265046816375425382, guid: 72cfe2d2e69e57d47a87e44c0ec80828, type: 3}
+  - {fileID: 2182461115793318742, guid: e24e4e55828fc8343bedf1d19c15c45e, type: 3}
+  - {fileID: 1586090984429784970, guid: 7a7998fd4f8aae74e952d9c5151733ff, type: 3}
+  - {fileID: 4031801749235631131, guid: de188357ef3989744b912737ed18ceaa, type: 3}
+  - {fileID: 8730599362930180323, guid: 86836f034438b344e96c4aca60a6a6c1, type: 3}
+  - {fileID: 6394035904508298324, guid: 4e0bc1bb9fbdc9242b004868b61e3f16, type: 3}
+  - {fileID: 3279154474884041609, guid: d1efa46fa6e77a84cb373ab279f53420, type: 3}
+  - {fileID: 6561037595691810037, guid: 6be2e01bdacba464d83899d41ee3a244, type: 3}
+  mapObjects:
+  - {fileID: 6076800961154813029, guid: 40e7259e094e22e428ebb52111e91e97, type: 3}
+  - {fileID: 6080619269876343833, guid: 404b142b7bf9ff341bea52141b094076, type: 3}
+  - {fileID: 3260089626903955574, guid: 4b1b19bf99c5ff8429a4f64b0f7d2148, type: 3}
+  - {fileID: 4892731677458322610, guid: ebc2693f1fa3bb04eb3c1170f31e00de, type: 3}
+  - {fileID: 188340987205656318, guid: 32c91e6bf49176d49bcf59b4bee1619f, type: 3}
+  moveAmount: 10
+  startTimeBtwRoom: 0.01
+  minX: 5
+  maxX: 35
+  minY: 5
