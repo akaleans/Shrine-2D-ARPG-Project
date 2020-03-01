@@ -39,6 +39,7 @@ public class AtLocationSpellTwister : MonoBehaviour
         if (alive)
         {
             myRigidBody.velocity = direction * spellSpeed;
+            print(this.transform.position.z);
         }
     }
 
