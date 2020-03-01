@@ -57,7 +57,8 @@ public class AtLocationSpellTwister : MonoBehaviour
         }
         else if (collision.tag == "Wall" || collision.tag == "Object")
         {
-            direction *= -1;
+            direction.x *= -1;
+            direction.y *= -1;
         }
     }
 }
