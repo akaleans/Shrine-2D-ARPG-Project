@@ -112,7 +112,7 @@ public class Player : Character
         }
         else if (currentElements[0] == 0 || currentElements[1] == 0) //FIRE
         {
-            if(currentElements[1] == -1) //FIRE ONLY
+            if(currentElements[0] == -1 || currentElements[1] == -1) //FIRE ONLY
             {
                 spellIndex = 2; // fireball
             }
