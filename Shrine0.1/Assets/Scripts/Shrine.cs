@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Shrine : MonoBehaviour
 {
@@ -34,5 +35,6 @@ public class Shrine : MonoBehaviour
     {
         Destroy(thisElement);
         Destroy(this.GetComponent<CircleCollider2D>());
+        Destroy(this.GetComponent<Light2D>());
     }
 }
