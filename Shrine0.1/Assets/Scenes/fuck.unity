@@ -1718,6 +1718,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 436633505, guid: dd3e5c83632b1ff4fa20000222336171, type: 3}
+      propertyPath: m_Intensity
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436633505, guid: dd3e5c83632b1ff4fa20000222336171, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436633505, guid: dd3e5c83632b1ff4fa20000222336171, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 436633505, guid: dd3e5c83632b1ff4fa20000222336171, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7049568089438491200, guid: dd3e5c83632b1ff4fa20000222336171,
         type: 3}
       propertyPath: m_LocalPosition.x
