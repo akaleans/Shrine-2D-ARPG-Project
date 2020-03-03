@@ -12,6 +12,8 @@ public class DeathBehaviour : StateMachineBehaviour
         Destroy(animator.transform.GetChild(0).gameObject);
         Destroy(animator.transform.GetChild(1).gameObject);
         Destroy(animator.transform.GetChild(2).gameObject);
+        Destroy(animator.transform.GetComponent<CapsuleCollider2D>());
+        Destroy(animator.transform.GetComponent<Rigidbody2D>());
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

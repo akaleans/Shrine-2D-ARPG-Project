@@ -38,14 +38,15 @@ public class AtLocationSpellTwister : MonoBehaviour
     {
         if (alive)
         {
-            myRigidBody.velocity = direction.normalized * spellSpeed;
+            myRigidBody.velocity = direction * spellSpeed;
+            print(this.transform.position.z);
         }
     }
 
     private void ChangeDirection()
     {
-        direction.x = Random.Range(-1, 1);
-        direction.y = Random.Range(-1, 1);
+        direction.x = Random.Range(-1f, 1f);
+        direction.y = Random.Range(-1f, 1f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,7 +55,11 @@ public class AtLocationSpellTwister : MonoBehaviour
         {
             Character c = collision.GetComponentInParent<Enemy>();
             c.TakeDamage(spellDamage, source);
-            GetComponent<Animator>().SetTrigger("hit");
+        }
+        else if (collision.tag == "Wall" || collision.tag == "Object")
+        {
+            direction.x *= -1;
+            direction.y *= -1;
         }
     }
 }

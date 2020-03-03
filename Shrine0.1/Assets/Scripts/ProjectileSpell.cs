@@ -51,5 +51,10 @@ public class ProjectileSpell : MonoBehaviour
             GetComponent<Animator>().SetTrigger("hit");
             spellSpeed = 0.5f;
         }
+        else if (collision.tag == "Wall" || collision.tag == "Object")
+        {
+            GetComponent<Animator>().SetTrigger("hit");
+            spellSpeed = 0.5f;
+        }
     }
 }
