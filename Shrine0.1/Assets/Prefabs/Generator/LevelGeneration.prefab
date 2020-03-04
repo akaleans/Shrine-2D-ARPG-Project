@@ -66,7 +66,7 @@ MonoBehaviour:
   - {fileID: 6561037595691810037, guid: 6be2e01bdacba464d83899d41ee3a244, type: 3}
   mapObjects:
   - {fileID: 6076800961154813029, guid: 40e7259e094e22e428ebb52111e91e97, type: 3}
-  - {fileID: 6080619269876343833, guid: 404b142b7bf9ff341bea52141b094076, type: 3}
+  - {fileID: 6414962558087685816, guid: a6cf20451dd5ade4fbb54e796350d06e, type: 3}
   - {fileID: 3260089626903955574, guid: 4b1b19bf99c5ff8429a4f64b0f7d2148, type: 3}
   - {fileID: 4892731677458322610, guid: ebc2693f1fa3bb04eb3c1170f31e00de, type: 3}
   - {fileID: 188340987205656318, guid: 32c91e6bf49176d49bcf59b4bee1619f, type: 3}
