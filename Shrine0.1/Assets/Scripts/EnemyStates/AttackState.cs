@@ -43,6 +43,7 @@ class AttackState : IEnemyState
     {
         parent.IsAttacking = true;
         parent.MyAnimator.SetTrigger("attack");
+        parent.MyTarget.GetComponent<Character>().TakeDamage(parent.MyAttackDamage, parent.transform);
 
         yield return new WaitForSeconds(parent.MyAttackSpeed);
 

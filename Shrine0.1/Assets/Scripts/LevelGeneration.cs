@@ -13,6 +13,7 @@ public class LevelGeneration : MonoBehaviour
     private Vector2[] roomTransforms = new Vector2[16];
     private int roomCount;
     private int shrineCount;
+    public EnemySpawner enemySpawner;
     
     private int rand;
     private int randomRoom;
@@ -842,7 +843,7 @@ public class LevelGeneration : MonoBehaviour
         }
     }
 
-    void Crawler()
+    void SpawnRemainingRooms()
     {
         position = 0;
         transform.position = startingPositions[0];
@@ -1099,6 +1100,14 @@ public class LevelGeneration : MonoBehaviour
         crawled = true;
     }
 
+    void MonsterMaker()
+    {
+        for(int i = 1; i <= roomCount; ++i)
+        {
+            Instantiate(enemySpawner, roomTransforms[i], Quaternion.identity);
+        }
+    }
+
     void ShrineSeeder()
     {
         if(roomCount == 3)
@@ -1176,7 +1185,8 @@ public class LevelGeneration : MonoBehaviour
             Instantiate(mapObjects[2], roomTransforms[roomCount], Quaternion.identity); // red portal
             Instantiate(mapObjects[4], roomTransforms[0], Quaternion.identity); // blue portal
             ShrineSeeder();
-            Crawler();
+            SpawnRemainingRooms();
+            MonsterMaker();
         }
     }
 }

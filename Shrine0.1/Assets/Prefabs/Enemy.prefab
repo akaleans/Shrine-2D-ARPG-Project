@@ -240,6 +240,7 @@ MonoBehaviour:
   myAttackRange: 0.75
   myCooldown: 0
   myAttackSpeed: 1
+  myAttackDamage: 5
   initAggroRange: 5
 --- !u!70 &3263084994777984394
 CapsuleCollider2D:

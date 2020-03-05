@@ -8,6 +8,9 @@ TagManager:
   - Shrine
   - Wall
   - Object
+  - Ground
+  - Gound
+  - Void
   layers:
   - Default
   - TransparentFX

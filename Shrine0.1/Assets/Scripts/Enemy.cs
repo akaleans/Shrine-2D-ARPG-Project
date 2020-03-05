@@ -16,8 +16,11 @@ public class Enemy : NPC
     [SerializeField]
     private float myAttackSpeed;
     [SerializeField]
+    private float myAttackDamage;
+    [SerializeField]
     private float initAggroRange;
 
+    public float MyAttackDamage { get => myAttackDamage; set => myAttackDamage = value; }
     public float MyAttackRange { get => myAttackRange; set => myAttackRange = value; }
     public float MyCooldown { get => myCooldown; set => myCooldown = value; }
     public float MyAttackSpeed { get => myAttackSpeed; set => myAttackSpeed = value; }
@@ -29,6 +32,8 @@ public class Enemy : NPC
             return Vector2.Distance(transform.position, MyTarget.position) < MyAggroRange;
         }
     }
+
+
 
     protected override void Update()
     {

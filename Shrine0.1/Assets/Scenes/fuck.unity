@@ -236,6 +236,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6414962558087685816, guid: a6cf20451dd5ade4fbb54e796350d06e,
         type: 3}
+    - target: {fileID: 2052917481957995161, guid: aa750390f4a9a49409bb46c2da2c7b9a,
+        type: 3}
+      propertyPath: enemySpawner
+      value: 
+      objectReference: {fileID: 7859865466782448458, guid: ee4000c2cbaa5d840ae749a773a2ee03,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa750390f4a9a49409bb46c2da2c7b9a, type: 3}
 --- !u!1 &339067266
@@ -872,7 +878,7 @@ PrefabInstance:
     - target: {fileID: 3325567566306545530, guid: 13dfe578efef32748b60c92657f2b04d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3325567566306545530, guid: 13dfe578efef32748b60c92657f2b04d,
         type: 3}
@@ -1241,7 +1247,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1750264462
 GameObject:
